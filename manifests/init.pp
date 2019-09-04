@@ -48,8 +48,7 @@ class scylla (
   ) inherits scylla::params {
 
     anchor  { 'scylla::begin': }
-    ->  class   { '::scylla::repo::yum': }
-    ->  class   { '::scylla::packages': }
+    ->  class   { '::scylla::repo::scylla_repo': }
     ->  class   { '::scylla::config': }
     ->  class   { '::scylla::firewalld': }
     ->  anchor  { 'scylla::end': }
