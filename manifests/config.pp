@@ -46,7 +46,7 @@ class scylla::config inherits ::scylla {
   }
 
   file { '/etc/systemd/system/scylla-server.service.d/10-timeout.conf':
-    content =>  file('10-timeout.conf'),
+    content =>  file('scylla/10-timeout.conf'),
   }~>
   exec { 'scylla-systemd-reload':
     command     => 'systemctl daemon-reload',
