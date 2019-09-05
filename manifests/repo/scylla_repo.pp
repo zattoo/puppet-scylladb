@@ -12,8 +12,13 @@ class scylla::repo::scylla_repo (
 
     package { $required_packages:
     ensure => present,
-    require  => Exec['apt-get update'],
+    }~>
+    exec { 'apt_update':
+      command     => 'apt-get update',
+      path        => [ '/usr/bin', '/bin', '/usr/sbin' ],
+      refreshonly => true,
     }
+
 
     case $::osfamily {
       'Debian': {
@@ -30,10 +35,14 @@ class scylla::repo::scylla_repo (
         exec { "scylla.source.list":
           path      => '/bin:/usr/bin:/sbin:/usr/sbin',
           command   => "wget -O /etc/apt/sources.list.d/scylla.list http://repositories.scylladb.com/scylla/repo/b956f642-36ba-4ba7-a565-68df8f10acb5/debian/scylladb-3.0-stretch.list",
+        }~>
+        exec { 'apt_update':
+          command     => 'apt-get update',
+          path        => [ '/usr/bin', '/bin', '/usr/sbin' ],
+          refreshonly => true,
         }
         package { 'scylla':
           ensure => present,
-          require  => Exec['apt-get update'],
         }
       }
       default: {
