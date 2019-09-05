@@ -7,17 +7,12 @@ class scylla::repo::scylla_repo (
   $repos = 'non-free',
   $location = 'https://repositories.scylladb.com/scylla/downloads/scylladb/b956f642-36ba-4ba7-a565-68df8f10acb5/scylla/deb/debian/scylladb-3.0',) {
 
-    package { 'apt-transport-https':
-      ensure => present
-    }
-    package { 'wget':
-      ensure => present
-    }
-    package { 'gnupg2':
-      ensure => present
-    }
-    package { 'dirmngr':
-      ensure => present
+
+    $required_packages = ['apt-transport-https','wget','gnupg2', 'dirmngr']
+
+    package { $required_packages:
+    ensure => present,
+    require  => Exec['apt-get update'],
     }
 
     case $::osfamily {
@@ -38,6 +33,7 @@ class scylla::repo::scylla_repo (
         }
         package { 'scylla':
           ensure => present
+          require  => Exec['apt-get update'],
         }
       }
       default: {
