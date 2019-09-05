@@ -32,7 +32,7 @@ class scylla::repo::scylla_repo (
           command   => "wget -O /etc/apt/sources.list.d/scylla.list http://repositories.scylladb.com/scylla/repo/b956f642-36ba-4ba7-a565-68df8f10acb5/debian/scylladb-3.0-stretch.list",
         }
         package { 'scylla':
-          ensure => present
+          ensure => present,
           require  => Exec['apt-get update'],
         }
       }
