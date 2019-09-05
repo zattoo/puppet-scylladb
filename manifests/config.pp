@@ -38,8 +38,6 @@ class scylla::config inherits ::scylla {
     mode   => '0755',
   }
 
-  include ::systemd::daemon_reload
-
   file{ '/etc/systemd/system/scylla-server.service.d' :
     ensure => directory,
     owner  => 'scylla',
