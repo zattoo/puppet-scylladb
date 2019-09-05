@@ -38,6 +38,8 @@ class scylla::config inherits ::scylla {
     mode   => '0755',
   }
 
+  include ::systemd::daemon_reload
+
   file{ '/etc/systemd/system/scylla-server.service.d' :
     ensure => directory,
     owner  => 'scylla',
@@ -46,7 +48,8 @@ class scylla::config inherits ::scylla {
   }
 
   file { '/etc/systemd/system/scylla-server.service.d/10-timeout.conf':
-    content =>  file('10-timeout.conf')
+    content =>  file('10-timeout.conf'),
+    notify => Class['systemd::daemon_reload'],
   }
 
 
