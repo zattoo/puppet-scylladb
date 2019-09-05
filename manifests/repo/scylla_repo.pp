@@ -7,13 +7,31 @@ class scylla::repo::scylla_repo (
   $repos = 'non-free',
   $location = 'https://repositories.scylladb.com/scylla/downloads/scylladb/b956f642-36ba-4ba7-a565-68df8f10acb5/scylla/deb/debian/scylladb-3.0',) {
 
-
-    $required_packages = ['apt-transport-https','wget','gnupg2', 'dirmngr']
-
-    package { $required_packages:
-    ensure => present,
-    require  => Exec['apt_update'],
+    exec { "apt-update":
+      command => "/usr/bin/apt-get update"
     }
+
+    Exec["apt-update"] -> Package <| |>
+
+    package { 'apt-transport-https':
+      ensure => present,
+      require  => Exec['apt-update'],
+    }
+
+    package { 'wget':
+      ensure => present,
+
+    }
+
+    package { 'gnupg2':
+      ensure => present,
+    }
+
+    package { 'dirmngr':
+      ensure => present,
+      require  => Exec['apt-update'],
+    }
+
 
     case $::osfamily {
       'Debian': {
@@ -26,14 +44,17 @@ class scylla::repo::scylla_repo (
         exec { "recieve gpg key":
           path      => '/bin:/usr/bin:/sbin:/usr/sbin',
           command   => "apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 17723034C56D4B19",
+          require  => Exec['apt_update'],
+
         }
         exec { "scylla.source.list":
           path      => '/bin:/usr/bin:/sbin:/usr/sbin',
           command   => "wget -O /etc/apt/sources.list.d/scylla.list http://repositories.scylladb.com/scylla/repo/b956f642-36ba-4ba7-a565-68df8f10acb5/debian/scylladb-3.0-stretch.list",
+          require  => Exec['apt-update'],
         }
         package { 'scylla':
           ensure => present,
-          require  => Exec['apt_update'],
+          require  => Exec['apt-update'],
         }
       }
       default: {
