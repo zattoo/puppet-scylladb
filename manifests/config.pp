@@ -38,11 +38,6 @@ class scylla::config inherits ::scylla {
     mode   => '0755',
   }
 
-  file { '/etc/rsyslog.d/scylla.conf':
-    content =>  "if \$programname == \"scylla\" then /var/log/scylla/output.log
-& stop"
-  }
-
   file_line { 'scylla_config':
     path  => '/usr/lib/systemd/system/scylla-server.service',
     line  => 'SyslogIdentifier=scylla',
