@@ -38,10 +38,15 @@ class scylla::config inherits ::scylla {
     mode   => '0755',
   }
 
-  file_line { 'scylla_config':
-    path  => '/usr/lib/systemd/system/scylla-server.service',
-    line  => 'SyslogIdentifier=scylla',
-    after => 'StandardOutput=syslog',
+  file{ '/etc/systemd/system/scylla-server.service.d' :
+    ensure => directory,
+    owner  => 'scylla',
+    group  => 'scylla',
+    mode   => '0755',
+  }
+
+  file { '/etc/systemd/system/scylla-server.service.d/10-timeout.conf':
+    content =>  file('10-timeout.conf')
   }
 
 
