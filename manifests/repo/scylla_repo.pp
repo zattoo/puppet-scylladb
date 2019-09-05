@@ -13,25 +13,9 @@ class scylla::repo::scylla_repo (
 
     Exec["apt-update"] -> Package <| |>
 
-    package { 'apt-transport-https':
-      ensure => present,
-      require  => Exec['apt-update'],
-    }
-
-    package { 'wget':
-      ensure => present,
-
-    }
-
     package { 'gnupg2':
       ensure => present,
     }
-
-    package { 'dirmngr':
-      ensure => present,
-      require  => Exec['apt-update'],
-    }
-
 
     case $::osfamily {
       'Debian': {
