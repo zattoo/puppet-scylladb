@@ -26,10 +26,6 @@ class scylla::config inherits ::scylla {
     content =>  template("${module_name}/scylla.yaml.erb")
   }
 
-  file { '/etc/scylla/cassandra-rackdc.properties':
-    content =>  template("${module_name}/cassandra-rackdc.properties.erb")
-  }
-
   # make scylla logs go into dedicated log as well
   file{ '/var/log/scylla' :
     ensure => directory,
