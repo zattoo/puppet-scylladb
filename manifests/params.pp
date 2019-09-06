@@ -45,7 +45,7 @@ class scylla::params {
 
   # Scylla_setup parameters
   $scylla_setup_skip_options              = '--no-ntp-setup --no-raid-setup'
-  $scylla_setup_nic_options               = '--setup-nic --nic bond0'
+  $scylla_setup_nic_options               = ''
 
   # Scylla-JMX
   $jmx_port                               = 7199
