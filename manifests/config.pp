@@ -45,13 +45,28 @@ class scylla::config inherits ::scylla {
     mode   => '0755',
   }
 
-  file { '/etc/systemd/system/scylla-server.service.d/10-timeout.conf':
-    content =>  file('scylla/10-timeout.conf'),
-  }~>
   exec { 'scylla-systemd-reload':
     command     => 'systemctl daemon-reload',
     path        => [ '/usr/bin', '/bin', '/usr/sbin' ],
     refreshonly => true,
+  }
+
+  file { '/etc/systemd/system/scylla-server.service.d/10-timeout.conf':
+    content =>  file('scylla/10-timeout.conf'),
+    notify => Exec['scylla-systemd-reload'],
+  }
+
+  file_line { 'execstart_scylla':
+    ensure => present,
+    path   => '/lib/systemd/system/scylla-server.service',
+    line   => '"ExecStart=/usr/bin/scylla ${scylla_args}",
+    match  => '^ExecStart',
+    notify => Exec['scylla-systemd-reload'],
+  }
+
+  service { 'scylla-server':
+    ensure => 'running',
+    enable => 'true',
   }
 
 

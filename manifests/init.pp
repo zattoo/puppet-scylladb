@@ -45,6 +45,7 @@ class scylla (
   $auto_snapshot                        = $scylla::params::auto_snapshot,
   $defragment_memory_on_idle            = $scylla::params::defragment_memory_on_idle,
   $cpuset                               = $scylla::params::cpuset,
+  $scylla_args                          = $scylla::params::scylla_args,
 
   ) inherits scylla::params {
 
