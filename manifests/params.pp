@@ -25,7 +25,7 @@ class scylla::params {
   $native_transport_port                 = 9042
   $read_request_timeout_in_ms            = 5000
   $write_request_timeout_in_ms           = 2000
-  $endpoint_snitch                       = 'GossipingPropertyFileSnitch'
+  $endpoint_snitch                       = 'SimpleSnitch'
   $rpc_port                              = 9160
   $api_port                              = 10000
   $api_address                           = '127.0.0.1'
