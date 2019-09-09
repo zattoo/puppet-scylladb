@@ -59,8 +59,8 @@ class scylla::config inherits ::scylla {
   file_line { 'execstart_scylla':
     ensure => present,
     path   => '/lib/systemd/system/scylla-server.service',
-    line   => '"ExecStart=/usr/bin/scylla ${scylla_args}",
-    match  => '^ExecStart',
+    line   => '"ExecStart=/usr/bin/scylla ${scylla_args}"',
+    match  => '^ExecStart$',
     notify => Exec['scylla-systemd-reload'],
   }
 
