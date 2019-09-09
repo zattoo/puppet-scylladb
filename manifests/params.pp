@@ -58,5 +58,6 @@ class scylla::params {
   $create_firewall_zone                   = false
   $firewall_zone_name                     = 'restricted'
   $firewall_interface                     = 'bond0'
+  $cpuset                                 = undef
 
 }

@@ -26,6 +26,10 @@ class scylla::config inherits ::scylla {
     content =>  template("${module_name}/scylla.yaml.erb")
   }
 
+  file { '/etc/scylla.d/cpuset.conf':
+    content =>  template("${module_name}/cpuset.erb")
+  }
+
   # make scylla logs go into dedicated log as well
   file{ '/var/log/scylla' :
     ensure => directory,
