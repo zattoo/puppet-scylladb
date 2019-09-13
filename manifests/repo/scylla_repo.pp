@@ -7,15 +7,9 @@ class scylla::repo::scylla_repo (
   $repos = 'non-free',
   $location = 'https://repositories.scylladb.com/scylla/downloads/scylladb/b956f642-36ba-4ba7-a565-68df8f10acb5/scylla/deb/debian/scylladb-3.0',) {
 
-    exec { "apt-update":
-      command => "/usr/bin/apt-get update"
-    }
-
-    Exec["apt-update"] -> Package <| |>
-
     package { 'gnupg2':
       ensure => present,
-    } ~>
+    }
 
     case $::osfamily {
       'Debian': {
@@ -26,20 +20,30 @@ class scylla::repo::scylla_repo (
          source => $key_url,
          options => 'http-proxy="http://squid.zattoo.com:3128 "',
         } ~>
-        exec { "recieve gpg key":
+        exec { "recieve_scylla_gpg_key":
           path      => '/bin:/usr/bin:/sbin:/usr/sbin',
           command   => 'apt-key adv --keyserver keyserver.ubuntu.com --keyserver-options http-proxy="http://squid.zattoo.com:3128" --recv-keys 17723034C56D4B19',
           require  => Exec['apt_update'],
 
-        }~>
-        exec { "scylla.source.list":
-          path      => '/bin:/usr/bin:/sbin:/usr/sbin',
-          command   => "wget -O /etc/apt/sources.list.d/scylla.list http://repositories.scylladb.com/scylla/repo/b956f642-36ba-4ba7-a565-68df8f10acb5/debian/scylladb-3.0-stretch.list",
-          require  => Exec['apt-update'],
-        }~>
+        }
+
+        apt::source { 'scylla.source.https.list':
+           location => "https://repositories.scylladb.com/scylla/downloads/scylladb/b956f642-36ba-4ba7-a565-68df8f10acb5/scylla/deb/debian/scylladb-3.0",
+           release  => $::os['distro']['codename'],
+           repos    => 'non-free',
+           notify   => Exec['apt_update'],
+        }
+        apt::source { 'scylla.source.http.list':
+           location => "http://download.opensuse.org/repositories/home:/scylladb:/scylla-3rdparty-stretch/Debian_9.0/",
+           release  => './',
+           repos    => '',
+           notify   => Exec['apt_update'],
+
+        }
+
         package { 'scylla':
           ensure => present,
-          require  => Exec['apt-update'],
+          require  => Exec['apt_update'],
         }
 
       }
