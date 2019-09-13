@@ -4,17 +4,6 @@
 #
 class scylla::config inherits ::scylla {
 
-  exec { 'scylla_setup':
-    command => "/usr/sbin/scylla_setup ${scylla::scylla_setup_skip_options} ${scylla::scylla_setup_nic_options}",
-    creates => '/var/lib/scylla/.scylla_setup_done',
-    before  => File['/var/lib/scylla/.scylla_setup_done'],
-    timeout =>  1800,
-  }
-
-  file { '/var/lib/scylla/.scylla_setup_done':
-    ensure => present,
-  }
-
   file{ $scylla::commitlog_directory :
     ensure => directory,
     owner  => 'scylla',
