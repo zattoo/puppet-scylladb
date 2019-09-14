@@ -36,6 +36,7 @@ class scylla (
   $rack                                 = $scylla::params::rack,
   $scylla_setup_skip_options            = $scylla::params::scylla_setup_skip_options,
   $scylla_setup_nic_options             = $scylla::params::scylla_setup_nic_options,
+  $timeout_start_seconds                = $scylla::params::timeout_start_seconds,
   $jmx_port                             = $scylla::params::jmx_port,
   $node_exporter_port                   = $scylla::params::node_exporter_port,
   $manage_firewall                      = $scylla::params::manage_firewall,
