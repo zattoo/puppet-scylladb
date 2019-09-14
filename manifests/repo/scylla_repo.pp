@@ -40,12 +40,6 @@ class scylla::repo::scylla_repo (
            notify   => Exec['apt_update'],
 
         }
-
-        package { 'scylla':
-          ensure => present,
-          require  => Exec['apt_update'],
-        }
-
       }
       default: {
         warning("OS family ${::osfamily} not supported")

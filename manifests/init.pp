@@ -51,6 +51,7 @@ class scylla (
 
     anchor  { 'scylla::begin': }
     ->  class   { '::scylla::repo::scylla_repo': }
+    ->  class   { '::scylla::packages': }
     ->  class   { '::scylla::config': }
     ->  class   { '::scylla::firewalld': }
     ->  anchor  { 'scylla::end': }

@@ -4,12 +4,8 @@
 #
 class scylla::packages {
 
-  #ABRT conflict with Scylla coredump configuration
-  package { 'abrt':
-    ensure => absent,
+  package { 'scylla':
+    ensure => "${scylla::major_version}.${scylla::minor_version}.${scylla::release}",
   }
 
-  ->  package { 'epel-release': }
-
-  ->  package { "scylla-${scylla::major_version}.${scylla::minor_version}-${scylla::release}": }
 }
