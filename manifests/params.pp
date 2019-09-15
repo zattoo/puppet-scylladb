@@ -15,7 +15,7 @@ class scylla::params {
   $seeds                                 = $::ipaddress
   $listen_address                        = $::ipaddress
   $broadcast_rpc_address                 = $::ipaddress
-  $rpc_address                           = '0.0.0.0'
+  $rpc_address                           = $::ipaddress
   $num_tokens                            = 256
   $data_file_directories                 = '/var/lib/scylla/data'
   $commitlog_directory                   = '/var/lib/scylla/commitlog'
