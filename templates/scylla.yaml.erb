@@ -798,6 +798,6 @@ api_doc_dir: /usr/lib/scylla/api/api-doc/
 #### extra options ###
 <%- if @scylla_config_options -%>
   <%- @scylla_config_options.each do |options| -%>
-    <%- options.each do |key, val| -%> <%=key-%>= <%= val -%> <% end -%>
+    <%- options.each do |key, val| %> <%key-%>=<%val-%><% end -%>
   <%- end -%>
 <%- end %>
