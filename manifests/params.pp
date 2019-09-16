@@ -62,4 +62,7 @@ class scylla::params {
   $cpuset                                 = undef
   $scylla_args                            = '--developer-mode=1'
 
+  # Scylla extra options
+  $scylla_config_options                  = undef
+
 }
