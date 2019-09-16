@@ -276,6 +276,7 @@ batch_size_warn_threshold_in_kb: <%= @batch_size_warn_threshold_in_kb %>
 partitioner: <%= @partitioner %>
 
 
+
 # policy for data disk failures:
 # die: shut down gossip and Thrift and kill the JVM for any fs errors or
 #      single-sstable errors, so the node can be replaced.
@@ -793,3 +794,10 @@ prometheus_port: <%= @prometheus_port %>
 # prometheus_address: 0.0.0.0
 api_ui_dir: /usr/lib/scylla/swagger-ui/dist/
 api_doc_dir: /usr/lib/scylla/api/api-doc/
+
+#### extra options ###
+<%- if @scylla_config_options -%>
+  <%- @scylla_config_options.each do |options| -%>
+    <%- options.each do |key, val| -%> <%=key-%>= <%= val -%> <% end -%>
+  <%- end -%>
+<%- end %>
