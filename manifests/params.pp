@@ -64,5 +64,6 @@ class scylla::params {
 
   # Scylla extra options
   $scylla_config_options                  = undef
+  $set_up_io_benchmark                    = false
 
 }

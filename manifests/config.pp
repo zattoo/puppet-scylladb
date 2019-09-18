@@ -40,6 +40,19 @@ class scylla::config inherits ::scylla {
     refreshonly => true,
   }
 
+  if $scylla::set_up_io_benchmark == true {
+    exec { 'scylla_io_setup':
+      command => "/usr/lib/scylla/scylla_io_setup",
+      creates => '/var/lib/scylla/.scylla_io_setup_done',
+      before  => File['/var/lib/scylla/.scylla_io_setup_done'],
+      timeout =>  1800,
+    }
+
+    file { '/var/lib/scylla/.scylla_io_setup_done':
+      ensure => present,
+    }
+  }
+
   file_line { 'execstart_scylla':
     ensure => present,
     path   => '/lib/systemd/system/scylla-server.service',

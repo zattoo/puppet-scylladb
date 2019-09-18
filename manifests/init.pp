@@ -48,6 +48,7 @@ class scylla (
   $cpuset                               = $scylla::params::cpuset,
   $scylla_args                          = $scylla::params::scylla_args,
   $scylla_config_options                = $scylla::params::scylla_config_options,
+  $set_up_io_benchmark                  = $scylla::params::set_up_io_benchmark,
 
   ) inherits scylla::params {
 
