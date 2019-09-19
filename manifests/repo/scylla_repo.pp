@@ -13,8 +13,8 @@ class scylla::repo::scylla_repo (
 
     case $::osfamily {
       'Debian': {
-        include apt
-        include apt::update
+        #include apt
+        #include apt::update
         apt::key {'scylla':
           id     => $key_id,
           source => $key_url,
