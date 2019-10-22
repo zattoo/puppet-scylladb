@@ -18,12 +18,8 @@ class scylla::repo::scylla_repo (
         apt::key {'scylla':
           id     => $key_id,
           source => $key_url,
-          options => 'http-proxy="http://squid.zattoo.com:3128 "',
-        } ~>
-        exec { "recieve_scylla_gpg_key":
-          path      => '/bin:/usr/bin:/sbin:/usr/sbin',
-          command   => 'apt-key adv --keyserver keyserver.ubuntu.com --keyserver-options http-proxy="http://squid.zattoo.com:3128" --recv-keys 17723034C56D4B19',
-          require  => Exec['apt_update'],
+          server => 'keyserver.ubuntu.com',
+          options => 'http-proxy="http://squid.zattoo.com:3128 " --recv-keys 17723034C56D4B19',
 
         }
 
