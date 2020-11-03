@@ -24,7 +24,7 @@ class scylla::repo::scylla_repo (
         apt::source { 'scylla.source.https.list':
           location => "${location}",
           release  => $::os['distro']['codename'],
-          repos    => 'non-free',
+          repos    => "${repos}",
           notify   => Exec['apt_update'],
         }
 
