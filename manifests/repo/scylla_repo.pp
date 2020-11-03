@@ -2,9 +2,9 @@
 class scylla::repo::scylla_repo (
   $key_id     = '7752A0722F457FB76C0F44985E08FBD8B5D6EC9C',
   $key_server = 'keyserver.ubuntu.com',
-  $release    = 'stretch',
+  $release    = $::os['distro']['codename'],
   $repos      = 'non-free',
-  $apt_key    =  '5e08fbd8b5d6ec9c',
+  $apt_key    = '5e08fbd8b5d6ec9c',
   $location   = 'https://repositories.scylladb.com/scylla/downloads/scylladb/deb/scylla/deb/debian/scylladb-4.2',) {
 
     package { 'gnupg2':
@@ -23,7 +23,7 @@ class scylla::repo::scylla_repo (
 
         apt::source { 'scylla.source.https.list':
           location => "${location}",
-          release  => $::os['distro']['codename'],
+          release  => "${release}",
           repos    => "${repos}",
           notify   => Exec['apt_update'],
         }
