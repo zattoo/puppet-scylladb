@@ -5,7 +5,7 @@ class scylla::repo::scylla_repo (
   $release    = $::os['distro']['codename'],
   $repos      = 'non-free',
   $apt_key    = '5e08fbd8b5d6ec9c',
-  $location   = 'https://repositories.scylladb.com/scylla/downloads/scylladb/deb/scylla/deb/debian/scylladb-4.2',) {
+  $location   = 'https://repositories.scylladb.com/scylla/downloads/scylladb/deb/scylla/deb/debian/scylladb-4.4',) {
 
     package { 'gnupg2':
       ensure => present,
