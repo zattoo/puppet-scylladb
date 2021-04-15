@@ -6,9 +6,9 @@
 class scylla::params {
 
   # ScyllaDB version
-  $major_version                         = '4.2'
+  $major_version                         = '4.4'
   $minor_version                         = '0-0'
-  $release                               = '20201025.94597e38e2-1'
+  $release                               = '20210322.dffbcabbb-1'
 
   # scylla.yaml
   $cluster_name                          = 'ScyllaCluster'
