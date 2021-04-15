@@ -49,6 +49,13 @@ class scylla (
   $scylla_args                          = $scylla::params::scylla_args,
   $scylla_config_options                = $scylla::params::scylla_config_options,
   $set_up_io_benchmark                  = $scylla::params::set_up_io_benchmark,
+  $apt_key_id                           = $scylla::params::apt_key_id,
+  $apt_key_server                       = $scylla::params::apt_key_server,
+  $distro_release                       = $scylla::params::distro_release,
+  $distro_repos                         = $scylla::params::distro_repos,
+  $apt_key                              = $scylla::params::apt_key,
+  $apt_location                         = $scylla::params::apt_location,
+  $squid_proxy                          = $scylla::params::squid_proxy,
 
   ) inherits scylla::params {
 
