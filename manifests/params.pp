@@ -6,9 +6,9 @@
 class scylla::params {
 
   # ScyllaDB version
-  $major_version                         = '4.4'
+  $major_version                         = '4.2'
   $minor_version                         = '0-0'
-  $release                               = '20210322.dffbcabbb-1'
+  $release                               = '20201025.94597e38e2-1'
 
   # scylla.yaml
   $cluster_name                          = 'ScyllaCluster'
@@ -70,7 +70,7 @@ class scylla::params {
   $distro_release                         = $::os['distro']['codename']
   $distro_repos                           = 'non-free'
   $apt_key                                = '5e08fbd8b5d6ec9c'
-  $apt_location                           = 'https://repositories.scylladb.com/scylla/downloads/scylladb/deb/scylla/deb/debian/scylladb-4.4'
+  $apt_location                           = 'https://repositories.scylladb.com/scylla/downloads/scylladb/deb/scylla/deb/debian/scylladb-4.2'
   $squid_proxy                            = 'http-proxy="http://squid.zattoo.com:3128 "'
 
 }
