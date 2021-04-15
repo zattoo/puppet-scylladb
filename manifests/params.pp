@@ -70,7 +70,7 @@ class scylla::params {
   $distro_release                         = $::os['distro']['codename']
   $distro_repos                           = 'non-free'
   $apt_key                                = '5e08fbd8b5d6ec9c'
-  $apt_location                           = 'https://repositories.scylladb.com/scylla/downloads/scylladb/deb/scylla/deb/debian/scylladb-4.2'
+  $apt_location                           = 'https://repositories.scylladb.com/scylla/downloads/scylladb/deb/scylla/deb/debian/scylladb-4.4'
   $squid_proxy                            = 'http-proxy="http://squid.zattoo.com:3128 "'
 
 }
